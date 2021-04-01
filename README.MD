@@ -24,4 +24,5 @@ https://www.youtube.com/watch?v=KJ5bFv-IRFM
 https://www.jcchouinard.com/python-automation-with-cron-on-mac/
 
 ## Inspiração pra ideia
+https://newsletter.filipedeschamps.com.br/
 https://www.youtube.com/watch?v=wm82gDsKN0E
