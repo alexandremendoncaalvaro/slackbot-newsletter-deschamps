@@ -2,7 +2,7 @@
 Slack Bot que publica a Newsletter do Deschamps recebida no Gmail
 
 ## Virtualização
-- Utilize o PIPENV pra gerenciar as dependencias
+- Utilize o PIPENV pra gerenciar as dependencias  
 https://medium.com/@wilfilho/porque-os-desenvolvedores-python-devem-usar-o-pipenv-ae3d3154c44
 
 ## Crie um bot de slack
@@ -20,7 +20,7 @@ https://www.youtube.com/watch?v=KJ5bFv-IRFM
 ## Automação
 - Crie um Crontab no seu sistema operacional pra chamar o script 1 vez por dia
 
-*Exemplo pra Mac OS* (mas é bem fácil de achar no google pra outros): 
+*Exemplo pra Mac OS* (mas é bem fácil de achar no google pra outros):  
 https://www.jcchouinard.com/python-automation-with-cron-on-mac/
 
 ## Inspiração pra ideia
