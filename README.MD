@@ -6,7 +6,7 @@ Slack Bot que publica a Newsletter do Deschamps recebida no Gmail
 https://medium.com/@wilfilho/porque-os-desenvolvedores-python-devem-usar-o-pipenv-ae3d3154c44
 
 ## Crie um bot de slack
-https://slack.com/intl/pt-br/help/articles/115005265703-Criar-um-bot-para-o-workspace
+https://slack.com/intl/pt-br/help/articles/115005265703-Criar-um-bot-para-o-workspace  
 https://www.youtube.com/watch?v=KJ5bFv-IRFM
 
 ## Credenciais e tokens
@@ -24,5 +24,5 @@ https://www.youtube.com/watch?v=KJ5bFv-IRFM
 https://www.jcchouinard.com/python-automation-with-cron-on-mac/
 
 ## Inspiração pra ideia
-https://newsletter.filipedeschamps.com.br/
+https://newsletter.filipedeschamps.com.br/  
 https://www.youtube.com/watch?v=wm82gDsKN0E
