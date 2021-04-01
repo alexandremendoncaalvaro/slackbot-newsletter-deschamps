@@ -95,9 +95,9 @@ def do_something(sc):
                     "type": "divider"
                 })
 
-        client.chat_postMessage(channel='#test-bot', blocks=blocks)
+        client.chat_postMessage(channel='#tech-news-br', blocks=blocks)
     else:
-        client.chat_postMessage(channel='#test-bot', text='sem notícias')
+        # client.chat_postMessage(channel='#test-bot', text='sem notícias')
         s.enter(300, 1, do_something, (sc,))
 
 s.enter(0, 1, do_something, (s,))
