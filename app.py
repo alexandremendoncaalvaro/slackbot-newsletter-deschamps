@@ -22,11 +22,11 @@ def main():
 def check_email():
     host = 'imap.gmail.com'
     port = 993
-    user = os.environ['USER']
+    email = os.environ['EMAIL']
     password = os.environ['PASSWORD']
 
     server = imaplib.IMAP4_SSL(host, port)
-    server.login(user, password)
+    server.login(email, password)
     server.select()
     status, data = server.search(
         None, '(FROM "newsletter@filipedeschamps.com.br" UNSEEN)')
@@ -124,7 +124,7 @@ def prepare_news(scheduler_retry):
         todayNoon = now.replace(hour=12, minute=00, second=0, microsecond=0)
         if now < todayNoon:
             scheduler_retry.enter(300, 1, prepare_news, (scheduler_retry,))
-        else: 
+        else:
             send_slack_text('Sem notícias publicadas pra hoje.')
 
 
