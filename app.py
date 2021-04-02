@@ -8,16 +8,18 @@ from pathlib import Path
 from dotenv import load_dotenv
 import sched
 import time
+from datetime import datetime
 
 
-s = sched.scheduler(time.time, time.sleep)
+def main():
+    env_path = Path('.') / '.env'
+    load_dotenv(dotenv_path=env_path)
+    scheduler_retry = sched.scheduler(time.time, time.sleep)
+    scheduler_retry.enter(0, 1, prepare_news, (scheduler_retry,))
+    scheduler_retry.run()
 
-env_path = Path('.') / '.env'
-load_dotenv(dotenv_path=env_path)
 
-client = slack.WebClient(token=os.environ['SLACK_TOKEN'])
-
-def do_something(sc):
+def check_email():
     host = 'imap.gmail.com'
     port = 993
     user = os.environ['USER']
@@ -28,6 +30,28 @@ def do_something(sc):
     server.select()
     status, data = server.search(
         None, '(FROM "newsletter@filipedeschamps.com.br" UNSEEN)')
+
+    return server, data
+
+
+def config_slack_client():
+    client = slack.WebClient(token=os.environ['SLACK_TOKEN'])
+    channel = os.environ['SLACK_CHANNEL']
+    return client, channel
+
+
+def send_slack_blocks(blocks):
+    client, channel = config_slack_client()
+    client.chat_postMessage(channel=channel, blocks=blocks)
+
+
+def send_slack_text(text):
+    client, channel = config_slack_client()
+    client.chat_postMessage(channel=channel, text=text)
+
+
+def prepare_news(scheduler_retry):
+    server, data = check_email()
 
     if data[0]:
         d = data[0].split()
@@ -40,10 +64,10 @@ def do_something(sc):
         text = utf.decode('utf-8')
         text = re.sub(r'^https?:\/\/.*[\r\n]*', '', text, flags=re.MULTILINE)
         text = text.replace('\r\n\r\n', '###').replace(
-            '\r\n', ' ').replace('###', '\r\n\r\n')  # pode melhorar
+            '\r\n', ' ').replace('###', '\r\n\r\n')
 
         text_lines = text.splitlines()
-        text_lines = text_lines[4:-5]
+        text_lines = text_lines[4:-2]
 
         blocks = [
             {
@@ -94,11 +118,15 @@ def do_something(sc):
                 blocks.append({
                     "type": "divider"
                 })
-
-        client.chat_postMessage(channel='#tech-news-br', blocks=blocks)
+        send_slack_blocks(blocks)
     else:
-        # client.chat_postMessage(channel='#test-bot', text='sem notícias')
-        s.enter(300, 1, do_something, (sc,))
+        now = datetime.now()
+        todayNoon = now.replace(hour=12, minute=00, second=0, microsecond=0)
+        if now < todayNoon:
+            scheduler_retry.enter(300, 1, prepare_news, (scheduler_retry,))
+        else: 
+            send_slack_text('Sem notícias publicadas pra hoje.')
 
-s.enter(0, 1, do_something, (s,))
-s.run()
+
+if __name__ == '__main__':
+    main()
