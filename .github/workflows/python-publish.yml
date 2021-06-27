@@ -16,7 +16,7 @@ jobs:
   deploy:
 
     runs-on: ubuntu-latest
-
+    environment: BEER_GARAGE
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
