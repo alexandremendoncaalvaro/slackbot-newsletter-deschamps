@@ -6,9 +6,10 @@ name = "pypi"
 [packages]
 python-dotenv = "*"
 slackclient = "*"
-pyttsx3 = "*"
 
 [dev-packages]
+rope = "*"
+autopep8 = "*"
 
 [requires]
 python_version = "3.9"
