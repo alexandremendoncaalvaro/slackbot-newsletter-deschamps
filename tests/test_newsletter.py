@@ -19,7 +19,9 @@ class TestNewsletter(unittest.TestCase):
         self.assertGreater(len(data), 0)
 
     def test_config_slack_client(self):
-        
+        client, channel = self.newsletter.config_slack_client()
+        self.assertIsNotNone(client)
+        self.assertRegex(channel, '(#+[a-zA-Z0-9(_)]{1,})')
 
 
 if __name__ == '__name__':
