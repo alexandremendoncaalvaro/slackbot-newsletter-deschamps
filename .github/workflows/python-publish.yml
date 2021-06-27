@@ -37,6 +37,11 @@ jobs:
       run: |
         pipenv install --deploy --dev
     - name: Run tests
+      env:
+        SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+        SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
+        EMAIL: ${{ secrets.EMAIL }}
+        PASSWORD: ${{ secrets.PASSWORD }}
       run: |
         pipenv install --dev
         pipenv run python -m unittest -v
