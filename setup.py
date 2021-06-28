@@ -10,7 +10,7 @@ except FileNotFoundError:
     pass
 
 setup(name='slackbot-newsletter-deschamps',
-    version='0.0.3',
+    version='0.0.4',
     url='https://github.com/alexandremendoncaalvaro/slackbot-newsletter-deschamps',
     license='MIT License',
     author='Alexandre Alvaro',
@@ -24,7 +24,7 @@ setup(name='slackbot-newsletter-deschamps',
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    package_dir={"": "src"},
-    packages=setuptools.find_packages(where="src"),
+    package_dir={"": "newsletter"},
+    packages=setuptools.find_packages(where="newsletter"),
     python_requires=">=3.9",
     install_requires=['python-dotenv', 'slackclient'],)
