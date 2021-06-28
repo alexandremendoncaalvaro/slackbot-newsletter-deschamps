@@ -1,15 +1,12 @@
 from setuptools import setup, setuptools
 
-readme = ""
 
-try:
-    with open("README.md", "r") as fh:
-        readme = fh.read()
-except FileNotFoundError:
-    pass
+with open("README.md", "r") as fh:
+    readme = fh.read()
+
 
 setup(name='slackbot-newsletter-deschamps',
-    version='0.0.2',
+    version='0.0.3',
     url='https://github.com/alexandremendoncaalvaro/slackbot-newsletter-deschamps',
     license='MIT License',
     author='Alexandre Alvaro',
@@ -25,5 +22,6 @@ setup(name='slackbot-newsletter-deschamps',
     ],
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
+    package_data={"":["README.md"]},
     python_requires=">=3.9",
     install_requires=['python-dotenv', 'slackclient'],)
