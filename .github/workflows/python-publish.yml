@@ -45,6 +45,9 @@ jobs:
       run: |
         pipenv install --dev
         pipenv run python -m unittest -v
+    - name: Prepare Package
+      run: |
+        pipenv run python setup.py sdist
     - name: Publish package
       uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
       with:
