@@ -1,22 +1,21 @@
-import os
 import imaplib
 import re
 import quopri
 import slack
 from datetime import datetime
 
-
-class Newsletter():
-    def __init__(self) -> None:
+class Newsletter:
+    def __init__(self, email, password, slack_token, slack_channel) -> None:
         self.host = 'imap.gmail.com'
         self.port = 993
+        self.email = email
+        self.password = password
+        self.slack_token = slack_token
+        self.slack_channel = slack_channel
 
     def check_email(self):
-        email = os.environ['EMAIL']
-        password = os.environ['PASSWORD']
-
         server = imaplib.IMAP4_SSL(self.host, self.port)
-        server.login(email, password)
+        server.login(self.email, self.password)
         server.select()
         status, data = server.search(
             None, '(FROM "newsletter@filipedeschamps.com.br" UNSEEN)')
@@ -24,8 +23,8 @@ class Newsletter():
         return server, data
 
     def config_slack_client(self):
-        client = slack.WebClient(token=os.environ['SLACK_TOKEN'])
-        channel = os.environ['SLACK_CHANNEL']
+        client = slack.WebClient(token=self.slack_token)
+        channel = self.slack_channel
         return client, channel
 
     def send_slack_blocks(self, blocks):
@@ -36,21 +35,12 @@ class Newsletter():
         client, channel = self.config_slack_client()
         client.chat_postMessage(channel=channel, text=text)
 
-    def prepare_news(self, scheduler_retry):
+    def prepare_news(self):
         server, data = self.check_email()
 
         if data[0]:
             blocks = self.config_blocks(data, server)
             self.send_slack_blocks(blocks)
-        else:
-            now = datetime.now()
-            todayNoon = now.replace(
-                hour=12, minute=00, second=0, microsecond=0)
-            if now < todayNoon:
-                scheduler_retry.enter(
-                    300, 1, self.prepare_news, (scheduler_retry,))
-            else:
-                self.send_slack_text('Sem notícias publicadas pra hoje.')
 
     def config_blocks(self, data, server):
         blocks = [
