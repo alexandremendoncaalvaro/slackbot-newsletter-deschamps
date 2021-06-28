@@ -10,7 +10,7 @@ except FileNotFoundError:
     pass
 
 setup(name='slackbot-newsletter-deschamps',
-    version='0.0.4',
+    version='0.0.5',
     url='https://github.com/alexandremendoncaalvaro/slackbot-newsletter-deschamps',
     license='MIT License',
     author='Alexandre Alvaro',
