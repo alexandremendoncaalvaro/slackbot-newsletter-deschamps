@@ -24,7 +24,6 @@ setup(name='slackbot-newsletter-deschamps',
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    package_dir={"": "newsletter"},
-    packages=setuptools.find_packages(where="newsletter"),
+    packages=["newsletter"],
     python_requires=">=3.9",
     install_requires=['python-dotenv', 'slackclient'],)
