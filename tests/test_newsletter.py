@@ -2,7 +2,7 @@ import unittest
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-from newsletter.newsletter import Newsletter
+from src.newsletter import Newsletter
 
 
 class TestNewsletter(unittest.TestCase):
