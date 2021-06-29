@@ -26,11 +26,11 @@ newsletter = Newsletter('email@email.com', 'password_do_email','token_slack','#c
 newsletter.prepare_news()
 
 ```
-Se por alguma questão estética as primeiras e últimas linhas do texto convertido com as notícias precisarem ser removidas, vc pode configurar passando parametros, conforme exemplo:  
+Vc pode adicionar ou remover linhas do texto convertido que vem do e-mail através de parâmetros:  
 ```bash
 from newsletter import Newsletter
 
-newsletter = Newsletter('email@email.com', 'password_do_email','token_slack','#canal_do_slack', 4, -5) # Neste exemplo as 4 primeras e as 5 ultimas linhas são removidas
+newsletter = Newsletter('email@email.com', 'password_do_email','token_slack','#canal_do_slack', 4, -5) # Neste exemplo as 4 primeiras e as 5 ultimas linhas são removidas
 newsletter.prepare_news()
 
 ```

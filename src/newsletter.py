@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 class Newsletter:
-    def __init__(self, email, password, slack_token, slack_channel, startline_from_top=0, endline_from_bottom=0) -> None:
+    def __init__(self, email, password, slack_token, slack_channel, startline_from_top=4, endline_from_bottom=-5) -> None:
         self.host = 'imap.gmail.com'
         self.port = 993
         self.email = email
