@@ -4,14 +4,17 @@ import quopri
 import slack
 from datetime import datetime
 
+
 class Newsletter:
-    def __init__(self, email, password, slack_token, slack_channel) -> None:
+    def __init__(self, email, password, slack_token, slack_channel, startline_from_top=0, endline_from_bottom=0) -> None:
         self.host = 'imap.gmail.com'
         self.port = 993
         self.email = email
         self.password = password
         self.slack_token = slack_token
         self.slack_channel = slack_channel
+        self.startline_from_top = startline_from_top
+        self.endline_from_bottom = endline_from_bottom
 
     def check_email(self):
         server = imaplib.IMAP4_SSL(self.host, self.port)
@@ -85,7 +88,8 @@ class Newsletter:
             '\r\n', ' ').replace('###', '\r\n\r\n')
 
         text_lines = text.splitlines()
-        text_lines = text_lines[4:-5]
+        text_lines = text_lines[self.startline_from_top:
+                                self.endline_from_bottom]
 
         for line in text_lines:
             if line != '':
