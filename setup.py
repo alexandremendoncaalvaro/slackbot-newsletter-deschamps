@@ -1,20 +1,14 @@
 from setuptools import setup, setuptools
+from os.path import abspath, dirname, join
 
-readme = ""
-
-try:
-    with open("README.md", "r") as fh:
-        readme = fh.read()
-except FileNotFoundError:
-    readme = 'https://github.com/alexandremendoncaalvaro/slackbot-newsletter-deschamps'
-    pass
+README_MD = open(join(dirname(abspath(__file__)), "README.md")).read()
 
 setup(name='slackbot-newsletter-deschamps',
-      version='0.0.6',
+      version='0.0.7',
       url='https://github.com/alexandremendoncaalvaro/slackbot-newsletter-deschamps',
       license='MIT License',
       author='Alexandre Alvaro',
-      long_description=readme,
+      long_description=README_MD,
       long_description_content_type="text/markdown",
       author_email='alexandre.alvaro@hotmail.com',
       keywords='Pacote',
