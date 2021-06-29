@@ -88,8 +88,18 @@ class Newsletter:
             '\r\n', ' ').replace('###', '\r\n\r\n')
 
         text_lines = text.splitlines()
-        text_lines = text_lines[self.startline_from_top:
-                                self.endline_from_bottom]
+
+        startline = 0
+        if self.startline_from_top > 0:
+            startline = self.startline_from_top
+
+        endline = 0
+        if self.endline_from_bottom < 0:
+            endline = self.endline_from_bottom
+        else:
+            text_lines = text_lines[startline:]
+
+        text_lines = text_lines[startline:endline]
 
         for line in text_lines:
             if line != '':
