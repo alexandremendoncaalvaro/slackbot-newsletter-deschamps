@@ -18,5 +18,5 @@ setup(name='slackbot-newsletter-deschamps',
       ],
       package_dir={"": "src"},
       py_modules=["newsletter"],
-      python_requires=">=3.9",
+      python_requires=">=3.8",
       install_requires=['python-dotenv', 'slackclient'],)
