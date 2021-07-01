@@ -2,19 +2,19 @@ import imaplib
 import re
 import quopri
 import slack
-from datetime import datetime
-
 
 class Newsletter:
-    def __init__(self, email, password, slack_token, slack_channel, startline_from_top=4, endline_from_bottom=-5) -> None:
-        self.host = 'imap.gmail.com'
-        self.port = 993
+    def __init__(self, email, password, slack_token, slack_channel) -> None:
         self.email = email
         self.password = password
         self.slack_token = slack_token
         self.slack_channel = slack_channel
-        self.startline_from_top = startline_from_top
-        self.endline_from_bottom = endline_from_bottom
+        self.host = 'imap.gmail.com'
+        self.port = 993
+        self.startline_from_top = 4
+        self.endline_from_bottom = -5
+        self.mrkdown_title = ":sunny: *Bom dia Fofuras!!!* :heart::heart::heart:\n Que tal aproveitar o almoço pra dar uma olhadinha no que tá rolando nas notícias do mundo da tecnologia?!"
+        self.mrkdown_subtitle = ":newspaper:  Resumo diário das principais notícias de tecnologia  :newspaper:"
 
     def check_email(self):
         server = imaplib.IMAP4_SSL(self.host, self.port)
@@ -37,6 +37,9 @@ class Newsletter:
     def send_slack_text(self, text):
         client, channel = self.config_slack_client()
         client.chat_postMessage(channel=channel, text=text)
+    
+    def publish(self):
+        self.prepare_news()
 
     def prepare_news(self):
         server, data = self.check_email()
@@ -51,14 +54,14 @@ class Newsletter:
                 "type": "section",
                 "text": {
                         "type": "mrkdwn",
-                        "text": ":sunny: *Bom dia Fofuras!!!* :heart::heart::heart:\n Que tal aproveitar o almoço pra dar uma olhadinha no que tá rolando nas notícias do mundo da tecnologia?!"
+                        "text": self.mrkdown_title
                 }
             },
             {
                 "type": "header",
                 "text": {
                     "type": "plain_text",
-                    "text": ":newspaper:  Resumo diário das principais notícias de tecnologia  :newspaper:"
+                    "text": self.mrkdown_subtitle
                 }
             },
             {
@@ -66,7 +69,7 @@ class Newsletter:
                 "elements": [
                     {
                         "type": "mrkdwn",
-                        "text": "Fonte: Newsletter Deschamps"
+                        "text": "Fonte: Newsletter Filipe Deschamps"
                     }
                 ]
             },

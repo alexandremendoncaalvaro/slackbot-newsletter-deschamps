@@ -2,7 +2,7 @@ from setuptools import setup, setuptools
 from os.path import abspath, dirname, join
 
 setup(name='slackbot-newsletter-deschamps',
-      version='1.0.1',
+      version='1.1.0',
       url='https://github.com/alexandremendoncaalvaro/slackbot-newsletter-deschamps',
       license='MIT License',
       author='Alexandre Alvaro',
